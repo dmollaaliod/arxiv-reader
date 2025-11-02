@@ -48,6 +48,7 @@ def retrieve_per_topic(state: GraphState) -> GraphState:
     - Authors (as a list)
     - Link
     - Abstract
+    - Publication - publication venue if available
     - Relevance Score (0-100)
     - Explanation of Relevance
 
@@ -76,7 +77,13 @@ def finalize_report(state: GraphState) -> GraphState:
 
     {state["papers"]}
 
-    Summarize the key findings and insights from these papers in relation to the topic.
+    Summarize the key findings and insights from these papers in relation to the topic. Include references to the relevant papers by inserting footnotes as indicated below:
+
+    text text text [1], text text text [2], etc.
+
+    1. Author et al., "Paper Title", publication Venue, Year. Link: URL
+    2. Author et al., "Paper Title", publication Venue, Year. Link: URL
+    3. ...
     """
     return {"report": model.invoke([HumanMessage(prompt)]).content}
 
